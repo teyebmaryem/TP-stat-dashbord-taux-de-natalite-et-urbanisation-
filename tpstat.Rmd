@@ -1,0 +1,78 @@
+---
+title: "tp_stat"
+author: "Teyeb Maryem"
+date: "2025-11-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+install.packages("readxl")
+install.packages("ggplot2")
+#install.packages("shiny")
+```
+
+```{r data}
+library(readxl)
+my_data<-read_excel("don_mls.xlsx")
+my_data
+print(colnames(df))
+```
+
+```{r eval=FALSE}
+#including data
+# t_nat=c(16.2,30.5,16.9,16,40.2,38.4,41.3,43.9,28.3,33.9,44.2,24.6,28,33.1)
+# t_urb=c(55,27.3,33.3,56.5,11.5,14.2,13.9,19,33.1,43.2,28.5,6.8,37.7,37.1)
+# t_nat
+# t_urb
+# data1=data.frame(t_nat, t_urb)
+# data1
+```
+
+## Including Plots
+
+```{r pressure, echo=FALSE}
+plot(my_data)
+```
+
+```{r}
+#modeling the data 
+my_model<-lm((my_data$`Taux de natalité`) ~ (my_data$`Taux d'urbanisation`))
+my_model
+summary(my_model)
+```
+
+```{r}
+library(ggplot2)
+ggplot(my_data, aes(x=`Taux d'urbanisation`))+
+  geom_point(aes(y=`Taux de natalité`), color="blue")+
+  geom_line(aes(y=fitted(my_model)), color="red")
+
+
+  
+
+```
+
+```{r}
+# #quantifier la relation entre t_urb et t_nat
+# #AKA correlation entre deux variables
+# install.packages("ggstatsplot")
+# library(ggstatsplot)
+# ggscatterstats(data = my_data, x = my_data$`Taux d'urbanisation`, y= my_data$`Taux de natalité` )
+```
+
+```{r}
+# Plot with regression line + confidence interval
+library(ggplot2)
+ggplot(my_data, aes(x = my_data$`Taux d'urbanisation`, y = my_data$`Taux de natalité`)) +
+  geom_point(color = "grey40") +
+  geom_smooth(method = "lm", color = "blue", fill = "grey70") +
+  theme_minimal()
+```
+
+```{r}
+boxplot(my_data)
+mean(my_data$`Taux d'urbanisation`)
+mean(my_data$`Taux de natalité`)
+
+```
