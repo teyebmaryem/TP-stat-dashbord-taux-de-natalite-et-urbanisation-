@@ -7,8 +7,8 @@ library(tidyr)
 my_data <- read_excel("don_mls.xlsx")
 as.data.frame(my_data)
 # --------------------
-# 1) Scatter plot simple
-# --------------------
+#  Scatter plot
+
 scatter_plot <- ggplot(my_data, aes(x = `Taux d'urbanisation`, y = `Taux de natalité`)) +
   geom_point(color = "darkgreen") +
   labs(title = "Scatter plot : Urbanisation vs Natalité",
@@ -17,8 +17,8 @@ scatter_plot <- ggplot(my_data, aes(x = `Taux d'urbanisation`, y = `Taux de nata
   theme_minimal()
 
 # --------------------
-# 2) Régression linéaire
-# --------------------
+# Régression linéaire
+
 my_model <- lm(`Taux de natalité` ~ `Taux d'urbanisation`, data = my_data)
 
 regression_plot <- ggplot(my_data, aes(x = `Taux d'urbanisation`, y = `Taux de natalité`)) +
@@ -30,8 +30,8 @@ regression_plot <- ggplot(my_data, aes(x = `Taux d'urbanisation`, y = `Taux de n
   theme_minimal()
 
 # --------------------
-# 3) Corrélation (scatter + lm line)
-# --------------------
+#Corrélation
+
 correlation_plot <- ggplot(my_data,
                            aes(x = `Taux d'urbanisation`,
                                y = `Taux de natalité`)) +
@@ -41,24 +41,7 @@ correlation_plot <- ggplot(my_data,
   theme_minimal()
 
 # --------------------
-# 4) Boxplot (2 variables)
-# --------------------
-# boxplot_urban <- ggplot(my_data, aes(y = `Taux d'urbanisation`)) +
-#   geom_boxplot(fill = "orange") +
-#   labs(title = "Boxplot du taux d'urbanisation") +
-#   theme_minimal()
-# 
-# boxplot_nat <- ggplot(my_data, aes(y = `Taux de natalité`)) +
-#   geom_boxplot(fill = "purple") +
-#   labs(title = "Boxplot du taux de natalité") +
-#   theme_minimal()
-# 
-# 
-# 
-# boxplot_both <- ggplot(my_data, aes(x = c(`Taux d'urbanisation`,`Taux de natalité`))) +
-#   geom_boxplot() +
-#   labs(title = "Boxplots dans un seul graphique") +
-#   theme_minimal()
+# Boxplot 
 
 
 box_data <- my_data |>
